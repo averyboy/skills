@@ -14,7 +14,8 @@ int main()
     server_addr.sin_family=AF_INET;
     server_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
     server_addr.sin_port=htons(TCP_PORT);
-    connect(client_socket,(struct sockaddr*)&server_addr,sizeof(server_addr));
+    int a=connect(client_socket,(struct sockaddr*)&server_addr,sizeof(server_addr));
+    cout<<a<<endl;
     char buffer[1024];
     read(client_socket,buffer,1024);
     cout<<buffer<<endl;
