@@ -16,7 +16,7 @@ int main()
     server_addr.sin_port=htons(TCP_PORT);
     connect(client_socket,(struct sockaddr*)&server_addr,sizeof(server_addr));
     char buffer[1024];
-    read(client_socket,buffer,sizeof(buffer)-1);
+    read(client_socket,buffer,1024);
     cout<<buffer<<endl;
     close(client_socket);
     return 0;
