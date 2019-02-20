@@ -25,9 +25,7 @@ int main()
         int client_socket;
         struct sockaddr_in client_addr;
         socklen_t client_addr_size=sizeof(client_addr);
-        cout<<"server socket fd: "<<server_socket<<endl;
-        client_socket=accept(server_socket,(struct sockaddr*)&client_socket,&client_addr_size);
-        cout<<"server socket fd: "<<server_socket<<endl;
+        client_socket=accept(server_socket,(struct sockaddr*)&client_addr,&client_addr_size);
         if(client_socket<0)
         {
             cout<<"established failed!"<<endl;
@@ -36,7 +34,6 @@ int main()
         char buffer[]="Hello World!";
         write(client_socket,buffer,sizeof(buffer));
         close(client_socket);
-        cout<<"server socket fd: "<<server_socket<<endl;
     }
     close(server_socket);
     return 0;
