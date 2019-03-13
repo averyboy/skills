@@ -18,7 +18,8 @@ int main()
     servaddr.sin_addr.s_addr=inet_addr("127.0.0.1");
     servaddr.sin_port=htons(TCP_PORT);
     socklen_t len =sizeof(servaddr);
-    bind(sockfd,(struct sockaddr*)&servaddr,len);
+    int tmp=bind(sockfd,(struct sockaddr*)&servaddr,len);
+    // cout<<"TMP: "<<tmp<<endl;
     listen(sockfd,10);
     while(true)
     {
