@@ -1,32 +1,55 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 const int maxn=1e5+10;
 int a[maxn];
-template<class T>
-class Heap
+struct Heap
 {
-private:
-    vector<T> ele;
+    int ele[maxn];
     int sz;
-public:
-    Heap(int _num)
+    Heap()
     {
         sz=0;
     }
-    void push(T x)
+    int size()
     {
-        if(sz+1==ele.size())
-        {
-            ele.resize(sz*2);
-        }
-        ele[++sz]=x;
+        return sz;
+    }
+    bool empty()
+    {
+        return sz==0?true:false;
+    }
+    void push(int v)
+    {
+        ele[++sz]=v;
         int x=sz;
-        while(x>1)
+        while(x>1 && ele[x]<ele[x>>1])
         {
-            if(ele[x]<ele[x>>1])
+            swap(ele[x],ele[x>>1]);
+            x>>=1;
+        }
+        return ;
+    }
+    int top()
+    {
+        return ele[1];
+    }
+    void pop()
+    {
+        if(sz==0)
+            return ;
+        ele[1]=ele[sz--];
+        int x=1;
+        while(x<sz)
+        {   
+            int son=x*2;
+            if(son>sz)
+                break;
+            if(son+1<=sz && ele[son]>ele[son+1])
+                son+=1;
+            if(ele[x]>ele[son])
             {
-                swap(ele[x],ele[x>>1]);
-                x>>=1;
+                swap(ele[x],ele[son]);
+                x=son;
             }
             else
             {
@@ -35,29 +58,31 @@ public:
         }
         return ;
     }
-    void pop()
-    {
-        if(sz==0)
-            return ;
-        ele[1]=ele[sz];
-        sz--;
-        int x=1;
-        while(x<sz)
-        {
-            if(ele[x]>ele[x<<1])
-            
-        }
-    }
-    T top()
-    {
-        return ele[1];
-    }
-    ~Heap()
-    {
-        delete[] ele;
-    }
 };
+void heapsort(int *a,int l,int r)
+{
+    Heap heap;
+    for(int i=l;i<r;i++)
+    {
+        heap.push(a[i]);
+    }
+    for(int i=l;i<r;i++)
+    {
+        a[i]=heap.top();
+        heap.pop();
+    }
+    return ;
+}
 int main()
 {
-
+    for(int i=0;i<10;i++)
+    {
+        a[i]=10-i;
+    }
+    heapsort(a,0,10);
+    for(int i=0;i<10;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
 }

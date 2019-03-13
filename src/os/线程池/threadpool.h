@@ -11,7 +11,7 @@ struct ThreadPool
     int queue_max_job_num;//最大任务数目
     Job* head;//任务头指针
     Job* tail;//任务尾指针
-    pthread_t* pthrads;//线程队列
+    pthread_t* pthreads;//线程队列
     pthread_mutex_t mutex;//互斥信号量
     pthread_cond_t queue_empty;//队列为空的条件变量
     pthread_cond_t queue_not_empty;//队列不为空的条件变量
@@ -22,5 +22,5 @@ struct ThreadPool
 };
 ThreadPool* threadpool_init(int thread_num,int queue_max_job_num);//初始化线程池
 int threadpool_add_job(ThreadPool* pool,void* (*func)(void*),void* arg);//向线程池中添加任务
-void* func(void* arg);//线程函数
+void* thread_func(void* arg);//线程函数
 int threadpool_destroy(ThreadPool* pool);

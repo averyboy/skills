@@ -23,12 +23,12 @@ void quickSort(int *a,int l,int r)
 }
 int main()
 {
-    for(int i=10;i>=0;i--)
+    for(int i=0;i<10;i++)
     {
-        a[10-i]=i;
+        a[i]=10-i;
     }
-    quickSort(a,0,10);
-    for(int i=0;i<11;i++)
+    quickSort(a,0,9);
+    for(int i=0;i<10;i++)
     {
         cout<<a[i]<<" ";
     }
