@@ -113,6 +113,30 @@ this并不是一个常规变量，而是个右值，所以不能取得 this的�
 - 智能指针
 
 3. 右值引用、移动语义和完美转发
+- forward和move\
+    **先说结论**
+    - std::move执行到右值的无条件转换。就其本身而言，它没有move任何东西
+    - std::forward只有在它的参数绑定到一个右值上的时候，它才转换它的参数到一个右值
+    - std::move和std::forward只不过就是执行类型转换的两个函数；std::move没有move任何东西，std::forward没有转发任何东西。在运行期，它们没有做任何事情。它们没有产生需要执行的代码，一byte都没有
+    - std::forward<T>()不仅可以保持左值或者右值不变，同时还可以保持const、Lreference、Rreference、validate等属性不变
+
+- move实现
+```cpp
+    template<class T> typename remove_reference<T>::type&&
+    std::move(T&& a) noexcept
+    {
+        typedef typename remove_reference<T>::type&& RvalRef;
+        return static_cast<RvalRef>(a);
+    }
+```
+- foward实现
+```cpp
+    template<class S>
+    S&& forward(typename remove_reference<S>::type& a) noexcept
+    {
+        return static_cast<S&&>(a);
+    }
+```
 
 4. lambda、function和bind
 

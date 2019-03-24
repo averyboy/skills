@@ -12,6 +12,7 @@ int main()
 {
     threadpool* pool=threadpool_create(10,10);
     threadpool_add_task(pool,func,(void*)"???");
+    sleep(1);
     threadpool_free(pool);
     return 0;
 }

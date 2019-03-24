@@ -1,5 +1,6 @@
 #include"threadpool.h"
 #include<iostream>
+using namespace std;
 threadpool* threadpool_create(int max_thr_num,int queue_max_size)
 {
     threadpool* pool;
@@ -11,7 +12,7 @@ threadpool* threadpool_create(int max_thr_num,int queue_max_size)
             perror("malloc threadpool failed!");
             break;
         }
-        std::cout<<"I'm OK"<<std::endl;
+        pool->shutdown=false;
         pool->max_thr_num=max_thr_num;
         pool->queue_max_size=queue_max_size;
         pool->queue_size=0;
@@ -40,7 +41,6 @@ threadpool* threadpool_create(int max_thr_num,int queue_max_size)
         {
             pthread_create((pool->threads)+i,NULL,threadpool_thread,(void*)pool);
         }
-        pool->shutdown=false;
         return pool;
     } while(0); 
     threadpool_free(pool);
@@ -85,6 +85,7 @@ int threadpool_add_task(threadpool* pool,void*(*func)(void*),void*(args))
         pthread_mutex_unlock(&pool->lock);
         return -1;
     }
+    pool->task_queue[(pool->queue_head+pool->queue_size)%(pool->queue_max_size)]=task;
     pool->queue_size++;
     pthread_cond_signal(&pool->queue_not_empty);
     pthread_mutex_unlock(&pool->lock);
@@ -94,9 +95,9 @@ int threadpool_add_task(threadpool* pool,void*(*func)(void*),void*(args))
 void threadpool_free(threadpool* pool)
 {
     if(!pool)
+    {
         return ;
-    if(!pool->shutdown)
-        return ;
+    }
     pool->shutdown=true;
     pthread_mutex_lock(&pool->lock);
     pthread_cond_broadcast(&pool->queue_not_empty);
