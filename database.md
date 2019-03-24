@@ -24,7 +24,9 @@
 
 - 数据库的主从同步
 
-- MVCC与next-key
+- MVCC、next-key、间隙锁
+
+- 乐观锁、悲观锁
 
 - mysql的两种引擎，innodb与myisam
 
