@@ -18,6 +18,7 @@
 - cd 
 - ls
 - iptable
+- crontab
 
 #### example
 - 给一行字符串，字符串是由很多端字符串组成的，求出该字符串中出现次数最短的短字符串iptables -I INPUT -p tcp --dport 8080 -j ACCEPT

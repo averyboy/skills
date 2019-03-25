@@ -1,10 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
+class Test
+{
+public:
+    Test()
+    {
+        cout<<"constructor"<<endl;
+    }
+    ~Test()
+    {
+        cout<<"decontructor"<<endl;
+    }
+};
 int main()
 {
-    const int a=10;
-    int &p=static_cast<int&>(a);
-    p=100;
-    cout<<p<<" "<<a<<endl;
+    {
+        Test a=Test();
+    }
+    cout<<"Hello world"<<endl;
     return 0;
 }
