@@ -1,22 +1,12 @@
 #include<bits/stdc++.h>
+#include<sys/types.h>
+#include<unistd.h>
 using namespace std;
-class Test
-{
-public:
-    Test()
-    {
-        cout<<"constructor"<<endl;
-    }
-    ~Test()
-    {
-        cout<<"decontructor"<<endl;
-    }
-};
 int main()
 {
-    {
-        Test a=Test();
-    }
-    cout<<"Hello world"<<endl;
-    return 0;
+    fork();
+    fork();
+    fork();
+    cout<<getpid()<<endl;
+    sleep(100);
 }
