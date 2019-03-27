@@ -19,12 +19,16 @@
 - ls
 - iptable
 - crontab
+- netstat
+- iostat
+- free 
+- tcpdump
+
 
 #### example
-- 给一行字符串，字符串是由很多端字符串组成的，求出该字符串中出现次数最短的短字符串iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-    - input：iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-    ```shelliptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-        str="heiptables -I INPUT -p tcp --dport 8080 -j ACCEPTllo world hello wo apple hiptables -I INPUT -p tcp --dport 8080 -j ACCEPTello hello appl world niptables -I INPUT -p tcp --dport 8080 -j ACCEPTokia unix" 
+- 给一行字符串，字符串是由很多端字符串组成的，求出该字符串中出现次数最短的短字符串
+    ```shell
+        str="hello world hello wo apple nokia unix" 
     ```
     - answer
     ```shell
